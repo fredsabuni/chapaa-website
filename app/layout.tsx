@@ -16,7 +16,12 @@ const body = Manrope({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://chapaa.co.tz";
+// Absolute base for share-image URLs: explicit setting, then Vercel's production domain
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://chapaa.co.tz");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -30,9 +35,13 @@ export const metadata: Metadata = {
       "Set a goal, top up from your phone, save with your people. Funds held by a licensed partner bank.",
     url: siteUrl,
     siteName: "Chapaa",
-    images: [{ url: "/logo.png", width: 549, height: 154, alt: "Chapaa" }],
     locale: "en_TZ",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chapaa · Save together, the Tanzanian way",
+    description: "Haba na haba hujaza kibaba. Set a goal, top up from your phone, save with your people.",
   },
 };
 
